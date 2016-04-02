@@ -5,6 +5,7 @@ public class MainScript : MonoBehaviour {
 	public GameObject cardboardObj;
 	public int yAcc;
 	public int zAcc;
+	public bool mode;
 	
 	private Rigidbody cardboardObjRB;
 	
@@ -16,16 +17,13 @@ public class MainScript : MonoBehaviour {
 	}
 
 	void TriggerPulled() {
-		Vector3 acc = new Vector3(0, 0, zAcc);
-		acc = transform.rotation * acc;
-		acc.y = yAcc;
-		Debug.Log(acc);
-		cardboardObjRB.AddForce(acc);
-	}
-	
-	void Update() {
-		if (cardboardObj.transform.position.y < 1) {
-			cardboardObj.transform.position = new Vector3(0, 3, 0);
+		if (mode) {
+			Vector3 acc = new Vector3(0, 0, zAcc);
+			acc = transform.rotation * acc;
+			acc.y = yAcc;
+			cardboardObjRB.AddForce(acc);
+		} else {
+			Debug.Log("Brrrt");
 		}
 	}
 }
