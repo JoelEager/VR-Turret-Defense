@@ -15,10 +15,7 @@ public class PlayerScript : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.CompareTag("Ground")) {
-			transform.position = initalPos;
-			main.LoseLife();
-		} else if (other.gameObject.CompareTag("Turret")) {
+		if (other.gameObject.CompareTag("Turret")) {
 			myBack.SetActive(true);
 			myGunL.SetActive(true);
 			myGunR.SetActive(true);

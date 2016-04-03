@@ -38,7 +38,7 @@ public class MainScript : MonoBehaviour {
 		if (mode) {
 			Vector3 acc = new Vector3(0, 0, zVelocity);
 			acc = transform.rotation * acc;
-			acc.y = yVelocity;
+			acc.y += yVelocity;
 			cardboardObjRB.velocity = acc;
 		} else {
 			Vector3 offsetL = transform.position + new Vector3(0, -0.2f, 0) + (transform.rotation * new Vector3(-0.5f, 0, 1));
