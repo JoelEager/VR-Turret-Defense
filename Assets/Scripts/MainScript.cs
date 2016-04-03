@@ -60,9 +60,7 @@ public class MainScript : MonoBehaviour {
 			player.Fly();
 			mode = true;
 		} else if (lives == 0) {
-			turret2.Deactivate();
-			player.Fly();
-			mode = true;
+			Application.LoadLevel(0);
 		}
 	}
 }
