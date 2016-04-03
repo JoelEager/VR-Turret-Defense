@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour {
 			myGunL.SetActive(true);
 			myGunR.SetActive(true);
 			
+			GetComponent<Rigidbody>().velocity = Vector3.zero;
 			other.gameObject.GetComponent<TurretScript>().Activate(transform);
 			main.mode = false;
 		}

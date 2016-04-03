@@ -3,8 +3,8 @@ using System.Collections;
 
 public class MainScript : MonoBehaviour {
 	public GameObject cardboardObj;
-	public int yAcc;
-	public int zAcc;
+	public int yVelocity;
+	public int zVelocity;
 	public bool mode;
 	
 	private Rigidbody cardboardObjRB;
@@ -18,10 +18,10 @@ public class MainScript : MonoBehaviour {
 
 	void TriggerPulled() {
 		if (mode) {
-			Vector3 acc = new Vector3(0, 0, zAcc);
+			Vector3 acc = new Vector3(0, 0, zVelocity);
 			acc = transform.rotation * acc;
-			acc.y = yAcc;
-			cardboardObjRB.AddForce(acc);
+			acc.y = yVelocity;
+			cardboardObjRB.velocity = acc;
 		} else {
 			Debug.Log("Brrrt");
 		}
