@@ -6,6 +6,7 @@ public class MainScript : MonoBehaviour {
 	public int yVelocity;
 	public int zVelocity;
 	public bool mode;
+	public PlayerScript player;
 	
 	private Rigidbody cardboardObjRB;
 	
@@ -23,7 +24,15 @@ public class MainScript : MonoBehaviour {
 			acc.y = yVelocity;
 			cardboardObjRB.velocity = acc;
 		} else {
-			Debug.Log("Brrrt");
+			if (Vector3.Angle(transform.rotation * Vector3.forward, Vector3.down) < 50) {
+				LeaveTurret();
+			}
 		}
+	}
+	
+	void LeaveTurret() {
+		player.Fly();
+		mode = true;
+		TriggerPulled();
 	}
 }

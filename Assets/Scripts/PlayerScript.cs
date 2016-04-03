@@ -6,6 +6,7 @@ public class PlayerScript : MonoBehaviour {
 	public GameObject myGunL;
 	public GameObject myGunR;
 	public MainScript main;
+	TurretScript LastTurret;
 	
 	private Vector3 initalPos;
 	
@@ -22,8 +23,16 @@ public class PlayerScript : MonoBehaviour {
 			myGunR.SetActive(true);
 			
 			GetComponent<Rigidbody>().velocity = Vector3.zero;
-			other.gameObject.GetComponent<TurretScript>().Activate(transform);
+			LastTurret = other.gameObject.GetComponent<TurretScript>();
+			LastTurret.Activate(transform);
 			main.mode = false;
 		}
+	}
+	
+	public void Fly() {
+		myBack.SetActive(false);
+		myGunL.SetActive(false);
+		myGunR.SetActive(false);
+		LastTurret.Deactivate();
 	}
 }
