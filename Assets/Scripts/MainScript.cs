@@ -7,6 +7,7 @@ public class MainScript : MonoBehaviour {
 	public int zVelocity;
 	public bool mode;
 	public PlayerScript player;
+	public Transform bullet;
 	
 	private Rigidbody cardboardObjRB;
 	
@@ -26,6 +27,12 @@ public class MainScript : MonoBehaviour {
 		} else {
 			if (Vector3.Angle(transform.rotation * Vector3.forward, Vector3.down) < 50) {
 				LeaveTurret();
+			} else {
+				Vector3 offsetL = transform.position + new Vector3(0, -0.2f, 0) + (transform.rotation * new Vector3(-0.5f, 0, 1));
+				Vector3 offsetR = transform.position + new Vector3(0, -0.2f, 0) + (transform.rotation * new Vector3(0.5f, 0, 1));
+				Quaternion bulletRotation = transform.rotation * Quaternion.Euler(90, 0, 0);
+				Instantiate(bullet, offsetL, bulletRotation);
+				Instantiate(bullet, offsetR, bulletRotation);
 			}
 		}
 	}
