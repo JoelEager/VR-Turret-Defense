@@ -16,4 +16,10 @@ public class BulletScript : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
+	
+	void OnTriggerEnter(Collider other) {
+		if (other.gameObject.CompareTag("Target")) {
+			Destroy(other.gameObject);
+		}
+	}
 }

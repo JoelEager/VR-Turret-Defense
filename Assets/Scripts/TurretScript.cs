@@ -17,5 +17,9 @@ public class TurretScript : MonoBehaviour {
 	
 	public void Deactivate() {
 		gameObject.SetActive(false);
+		myBack.SetActive(false);
+		myGunL.SetActive(false);
+		myGunR.SetActive(false);
+		myStand.SetActive(false);
 	}
 }

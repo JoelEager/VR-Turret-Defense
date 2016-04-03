@@ -8,6 +8,12 @@ public class MainScript : MonoBehaviour {
 	public bool mode;
 	public PlayerScript player;
 	public Transform bullet;
+	public Transform target;
+	public TurretScript turret0;
+	public TurretScript turret1;
+	public TurretScript turret2;
+	public TextMesh HUDText;
+	public int lives;
 	
 	private Rigidbody cardboardObjRB;
 	
@@ -16,6 +22,14 @@ public class MainScript : MonoBehaviour {
 		Cardboard.SDK.OnTrigger += TriggerPulled;
 		
 		cardboardObjRB = cardboardObj.GetComponent<Rigidbody>();
+		
+		Invoke("SpawnTarget", 5);
+	}
+	
+	void SpawnTarget() {
+		Transform newTarget = (Transform) Instantiate(target, new Vector3(0, 15, 75), Quaternion.identity);
+		newTarget.GetComponent<TargetScript>().main = this;
+		Invoke("SpawnTarget", 3);
 	}
 
 	void TriggerPulled() {
@@ -25,21 +39,30 @@ public class MainScript : MonoBehaviour {
 			acc.y = yVelocity;
 			cardboardObjRB.velocity = acc;
 		} else {
-			if (Vector3.Angle(transform.rotation * Vector3.forward, Vector3.down) < 50) {
-				LeaveTurret();
-			} else {
-				Vector3 offsetL = transform.position + new Vector3(0, -0.2f, 0) + (transform.rotation * new Vector3(-0.5f, 0, 1));
-				Vector3 offsetR = transform.position + new Vector3(0, -0.2f, 0) + (transform.rotation * new Vector3(0.5f, 0, 1));
-				Quaternion bulletRotation = transform.rotation * Quaternion.Euler(90, 0, 0);
-				Instantiate(bullet, offsetL, bulletRotation);
-				Instantiate(bullet, offsetR, bulletRotation);
-			}
+			Vector3 offsetL = transform.position + new Vector3(0, -0.2f, 0) + (transform.rotation * new Vector3(-0.5f, 0, 1));
+			Vector3 offsetR = transform.position + new Vector3(0, -0.2f, 0) + (transform.rotation * new Vector3(0.5f, 0, 1));
+			Quaternion bulletRotation = transform.rotation * Quaternion.Euler(90, 0, 0);
+			Instantiate(bullet, offsetL, bulletRotation);
+			Instantiate(bullet, offsetR, bulletRotation);
 		}
 	}
 	
-	void LeaveTurret() {
-		player.Fly();
-		mode = true;
-		TriggerPulled();
+	public void LoseLife() {
+		lives--;
+		HUDText.text = "Lives: " + lives;
+		
+		if (lives == 10) {
+			turret0.Deactivate();
+			player.Fly();
+			mode = true;
+		} else if (lives == 5) {
+			turret1.Deactivate();
+			player.Fly();
+			mode = true;
+		} else if (lives == 0) {
+			turret2.Deactivate();
+			player.Fly();
+			mode = true;
+		}
 	}
 }

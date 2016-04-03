@@ -6,7 +6,6 @@ public class PlayerScript : MonoBehaviour {
 	public GameObject myGunL;
 	public GameObject myGunR;
 	public MainScript main;
-	TurretScript LastTurret;
 	
 	private Vector3 initalPos;
 	
@@ -17,14 +16,14 @@ public class PlayerScript : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag("Ground")) {
 			transform.position = initalPos;
+			main.LoseLife();
 		} else if (other.gameObject.CompareTag("Turret")) {
 			myBack.SetActive(true);
 			myGunL.SetActive(true);
 			myGunR.SetActive(true);
 			
 			GetComponent<Rigidbody>().velocity = Vector3.zero;
-			LastTurret = other.gameObject.GetComponent<TurretScript>();
-			LastTurret.Activate(transform);
+			other.gameObject.GetComponent<TurretScript>().Activate(transform);
 			main.mode = false;
 		}
 	}
@@ -33,6 +32,17 @@ public class PlayerScript : MonoBehaviour {
 		myBack.SetActive(false);
 		myGunL.SetActive(false);
 		myGunR.SetActive(false);
-		LastTurret.Deactivate();
+	}
+	
+	void Update() {
+		if (transform.position.x > 75) {
+			transform.position = new Vector3(75, transform.position.y, transform.position.z);
+		} else if (transform.position.x < -75) {
+			transform.position = new Vector3(-75, transform.position.y, transform.position.z);
+		} else if (transform.position.z > 75) {
+			transform.position = new Vector3(transform.position.x, transform.position.y, 75);
+		} else if (transform.position.z < -75) {
+			transform.position = new Vector3(transform.position.x, transform.position.y, -75);
+		}
 	}
 }
