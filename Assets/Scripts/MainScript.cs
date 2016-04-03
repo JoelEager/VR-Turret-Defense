@@ -29,7 +29,7 @@ public class MainScript : MonoBehaviour {
 	}
 	
 	void SpawnTarget() {
-		Transform newTarget = (Transform) Instantiate(target, new Vector3(0, 15, 75), Quaternion.identity);
+		Transform newTarget = (Transform) Instantiate(target, new Vector3(0, 20, 75), Quaternion.identity);
 		newTarget.GetComponent<TargetScript>().main = this;
 		Invoke("SpawnTarget", 3);
 	}
