@@ -15,6 +15,7 @@ public class MainScript : MonoBehaviour {
 	public TextMesh HUDText;
 	public int lives;
 	
+	private int score = 0;
 	private Rigidbody cardboardObjRB;
 	
 	void Start() {
@@ -23,6 +24,7 @@ public class MainScript : MonoBehaviour {
 		
 		cardboardObjRB = cardboardObj.GetComponent<Rigidbody>();
 		
+		UpdateHUD();
 		Invoke("SpawnTarget", 5);
 	}
 	
@@ -49,18 +51,25 @@ public class MainScript : MonoBehaviour {
 	
 	public void LoseLife() {
 		lives--;
-		HUDText.text = "Lives: " + lives;
+		UpdateHUD();
 		
 		if (lives == 10) {
 			turret0.Deactivate();
-			player.Fly();
-			mode = true;
+			player.Fly(0);
 		} else if (lives == 5) {
 			turret1.Deactivate();
-			player.Fly();
-			mode = true;
+			player.Fly(1);
 		} else if (lives == 0) {
 			Application.LoadLevel(0);
 		}
+	}
+	
+	public void Score() {
+		score++;
+		UpdateHUD();
+	}
+	
+	void UpdateHUD() {
+		HUDText.text = "Lives: " + lives + "\nKills: " + score;
 	}
 }

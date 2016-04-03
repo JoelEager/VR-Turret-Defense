@@ -6,6 +6,7 @@ public class TurretScript : MonoBehaviour {
 	public GameObject myGunL;
 	public GameObject myGunR;
 	public GameObject myStand;
+	public int id;
 	
 	public void Activate(Transform player) {
 		player.position = transform.position + new Vector3(0, 0.5f, 0);
