@@ -41,8 +41,8 @@ public class MainScript : MonoBehaviour {
 			acc.y += yVelocity;
 			cardboardObjRB.velocity = acc;
 		} else {
-			Vector3 offsetL = transform.position + new Vector3(0, -0.2f, 0) + (transform.rotation * new Vector3(-0.5f, 0, 1));
-			Vector3 offsetR = transform.position + new Vector3(0, -0.2f, 0) + (transform.rotation * new Vector3(0.5f, 0, 1));
+			Vector3 offsetL = transform.position + new Vector3(0, -0.2f, 0) + (transform.rotation * new Vector3(-0.5f, 0, 2));
+			Vector3 offsetR = transform.position + new Vector3(0, -0.2f, 0) + (transform.rotation * new Vector3(0.5f, 0, 2));
 			Quaternion bulletRotation = transform.rotation * Quaternion.Euler(90, 0, 0);
 			Instantiate(bullet, offsetL, bulletRotation);
 			Instantiate(bullet, offsetR, bulletRotation);
@@ -70,6 +70,8 @@ public class MainScript : MonoBehaviour {
 	}
 	
 	void UpdateHUD() {
-		HUDText.text = "Lives: " + lives + "\nKills: " + score;
+		if (HUDText != null) {
+			HUDText.text = "Lives: " + lives + "\nKills: " + score;
+		}
 	}
 }
