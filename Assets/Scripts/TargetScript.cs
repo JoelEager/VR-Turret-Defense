@@ -8,9 +8,9 @@ public class TargetScript : MonoBehaviour {
 	private bool active = true;
 	
 	void Start() {
-		transform.Translate(new Vector3(0, Random.Range(-5, 5), 0));
-		transform.Translate(new Vector3(Random.Range(-50, 50), 0, 0));
-		Speed += Random.Range(-10, 10);
+		transform.Translate(new Vector3(Random.Range(-15, 15), 0, 0));
+		transform.Rotate(new Vector3(0, Random.Range(-15, 15), 0), Space.Self);
+		Speed += Random.Range(-5, 5);
 	}
 	
 	void Update () {

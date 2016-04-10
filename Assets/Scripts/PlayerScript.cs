@@ -23,7 +23,7 @@ public class PlayerScript : MonoBehaviour {
 			GetComponent<Rigidbody>().velocity = Vector3.zero;
 			other.gameObject.GetComponent<TurretScript>().Activate(transform);
 			currentTurret = other.gameObject.GetComponent<TurretScript>().id;
-			main.mode = false;
+			main.mode = 1;
 		}
 	}
 	
@@ -32,7 +32,7 @@ public class PlayerScript : MonoBehaviour {
 			myBack.SetActive(false);
 			myGunL.SetActive(false);
 			myGunR.SetActive(false);
-			main.mode = true;
+			main.mode = 0;
 		}
 	}
 	
